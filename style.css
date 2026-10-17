@@ -1,0 +1,676 @@
+
+/* ==========================================
+   1. GLOBAL VARIABLES
+========================================== */
+
+:root {
+    color-scheme: dark;
+
+    --bg: #0b1020;
+    --panel: #121a2d;
+    --panel-light: #19243a;
+    --border: #2a3650;
+    --text: #edf2ff;
+    --muted: #98a7c2;
+    --accent: #7c9cff;
+    --green: #43d9a3;
+    --yellow: #ffd166;
+    --red: #ff737e;
+}
+
+
+/* ==========================================
+   2. GLOBAL RESET
+========================================== */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+
+    background:
+        radial-gradient(ellipse at top, #192849 0%, transparent 55%),
+        var(--bg);
+
+    color: var(--text);
+    font-family: Inter, "Segoe UI", Arial, sans-serif;
+    line-height: 1.6;
+
+    -webkit-font-smoothing: antialiased;
+}
+
+button,
+input {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+
+/* ==========================================
+   3. MAIN LAYOUT
+========================================== */
+
+.app {
+    width: min(100% - 32px, 760px);
+    margin: 0 auto;
+    padding: 52px 0 24px;
+}
+
+.header {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 32px;
+}
+
+.brand-icon {
+    display: grid;
+    place-items: center;
+    flex: 0 0 52px;
+    height: 52px;
+
+    border: 1px solid #405681;
+    border-radius: 15px;
+    background: #1c2b49;
+
+    color: var(--accent);
+    font-size: 28px;
+    font-weight: 700;
+}
+
+
+/* ==========================================
+   4. HEADINGS AND TEXT
+========================================== */
+
+.eyebrow {
+    margin: 0 0 5px;
+    color: var(--accent);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.8px;
+}
+
+h1,
+h2,
+h3,
+p {
+    margin-top: 0;
+}
+
+h1 {
+    margin-bottom: 7px;
+    font-size: clamp(24px, 4vw, 34px);
+    line-height: 1.2;
+    letter-spacing: -0.8px;
+}
+
+h2 {
+    margin-bottom: 0;
+    font-size: 20px;
+    line-height: 1.35;
+}
+
+h3 {
+    margin: 26px 0 12px;
+    font-size: 15px;
+}
+
+.subtitle,
+.privacy-note,
+.disclaimer,
+footer {
+    color: var(--muted);
+}
+
+.subtitle {
+    margin-bottom: 0;
+    font-size: 14px;
+}
+
+
+/* ==========================================
+   5. MAIN PANEL
+========================================== */
+
+.panel {
+    padding: clamp(20px, 5vw, 34px);
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    background: rgb(18 26 45 / 94%);
+    box-shadow: 0 24px 80px rgb(0 0 0 / 22%);
+}
+
+.panel-heading,
+.result-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+}
+
+.panel-heading {
+    margin-bottom: 28px;
+}
+
+.local-badge {
+    flex-shrink: 0;
+    padding: 5px 9px;
+
+    border: 1px solid #285b50;
+    border-radius: 999px;
+    background: #14332f;
+
+    color: var(--green);
+    font-size: 11px;
+    font-weight: 700;
+}
+
+
+/* ==========================================
+   6. PASSWORD INPUT FIELD
+========================================== */
+
+label {
+    display: block;
+    margin-bottom: 9px;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.password-field {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 5px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: #0c1323;
+
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.password-field:focus-within {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgb(124 156 255 / 12%);
+}
+
+.password-field input {
+    flex: 1;
+    width: 100%;
+    min-width: 0;
+    padding: 10px;
+
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: var(--text);
+}
+
+.password-field input::placeholder {
+    color: #667692;
+}
+
+
+/* ==========================================
+   7. SINGLE SHOW / HIDE PASSWORD ICON
+========================================== */
+
+#togglePassword {
+    display: grid;
+    place-items: center;
+
+    flex: 0 0 42px;
+    width: 42px;
+    height: 42px;
+    padding: 0;
+
+    border: 1px solid transparent;
+    border-radius: 9px;
+    background: transparent;
+    color: var(--muted);
+
+    position: relative;
+    z-index: 1;
+
+    transition: color 0.2s, background 0.2s;
+}
+
+#togglePassword:hover {
+    background: var(--panel-light);
+    color: var(--text);
+}
+
+#togglePassword svg {
+    display: block;
+    width: 22px;
+    height: 22px;
+    pointer-events: none;
+}
+
+#togglePassword:focus-visible {
+    outline: 3px solid white;
+    outline-offset: 2px;
+}
+
+
+/* ==========================================
+   8. PRIVACY NOTE AND ANALYZE BUTTON
+========================================== */
+
+.privacy-note {
+    margin: 10px 0 20px;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+.analyze-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    width: 100%;
+    padding: 14px 18px;
+
+    border: 0;
+    border-radius: 11px;
+    background: var(--accent);
+    color: #091126;
+
+    font-weight: 800;
+    transition: filter 0.2s, transform 0.2s;
+}
+
+.analyze-button:hover {
+    filter: brightness(1.1);
+    transform: translateY(-1px);
+}
+
+button:focus-visible {
+    outline: 3px solid white;
+    outline-offset: 3px;
+}
+
+
+/* ==========================================
+   9. ANALYSIS RESULTS
+========================================== */
+
+.results {
+    margin-top: 30px;
+    padding-top: 25px;
+    border-top: 1px solid var(--border);
+}
+
+.result-heading {
+    margin-bottom: 17px;
+}
+
+#strengthLabel {
+    font-size: 23px;
+}
+
+.score-label {
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 700;
+    text-align: right;
+}
+
+
+/* ==========================================
+   10. PASSWORD STRENGTH METER
+========================================== */
+
+.meter-track {
+    height: 9px;
+    overflow: hidden;
+
+    border-radius: 999px;
+    background: #29344a;
+}
+
+.meter-fill {
+    width: 0;
+    height: 100%;
+
+    border-radius: inherit;
+    background: var(--red);
+
+    transition: width 0.3s ease, background 0.3s ease;
+}
+
+
+/* ==========================================
+   11. ENTROPY CARD
+========================================== */
+
+.entropy-card {
+    margin: 20px 0;
+    padding: 18px;
+
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--panel-light);
+}
+
+.entropy-value {
+    margin: 0;
+    color: var(--green);
+    font-size: 32px;
+    font-weight: 800;
+}
+
+.entropy-unit {
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.entropy-note {
+    margin: 5px 0 0;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+
+/* ==========================================
+   12. SECURITY CHECKLIST
+========================================== */
+
+.checklist {
+    display: grid;
+    gap: 10px;
+
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+
+    padding: 11px 13px;
+
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: #10182a;
+
+    font-size: 13px;
+}
+
+.check-icon {
+    flex-shrink: 0;
+    font-weight: 800;
+}
+
+.check-item.pass .check-icon {
+    color: var(--green);
+}
+
+.check-item.fail .check-icon {
+    color: var(--red);
+}
+
+
+/* ==========================================
+   13. COMMON PASSWORD WARNING
+========================================== */
+
+.warning {
+    margin-top: 16px;
+    padding: 13px;
+
+    border: 1px solid #765c2d;
+    border-radius: 10px;
+    background: #302719;
+
+    color: var(--yellow);
+    font-size: 13px;
+}
+
+
+/* ==========================================
+   14. SECURITY RECOMMENDATIONS
+========================================== */
+
+.recommendations ul {
+    display: grid;
+    gap: 10px;
+
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.recommendations li {
+    position: relative;
+    padding-left: 18px;
+
+    color: #c5d0e5;
+    font-size: 13px;
+}
+
+.recommendations li::before {
+    position: absolute;
+    left: 0;
+
+    color: var(--accent);
+    content: "→";
+}
+
+
+/* ==========================================
+   15. SECURITY AUDIT REPORT
+========================================== */
+
+.audit-report {
+    margin-top: 28px;
+    padding: 22px;
+
+    border: 1px solid #374151;
+    border-radius: 12px;
+    background: #111827;
+
+    overflow-wrap: anywhere;
+}
+
+.audit-report h2 {
+    margin-bottom: 14px;
+}
+
+.audit-report h3 {
+    margin: 26px 0 12px;
+}
+
+.audit-report p {
+    margin: 10px 0;
+}
+
+.audit-report ul {
+    padding-left: 22px;
+    margin-bottom: 20px;
+}
+
+.audit-report li {
+    margin-bottom: 8px;
+}
+
+.print-button {
+    padding: 11px 16px;
+
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--panel-light);
+    color: var(--text);
+
+    font-weight: 700;
+}
+
+.print-button:hover {
+    border-color: var(--accent);
+}
+
+
+/* ==========================================
+   16. DISCLAIMER AND FOOTER
+========================================== */
+
+.disclaimer {
+    margin: 24px 0 0;
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+footer {
+    padding: 20px 0;
+    text-align: center;
+    font-size: 12px;
+}
+
+
+/* ==========================================
+   17. RESPONSIVE DESIGN
+========================================== */
+
+@media (max-width: 520px) {
+    .app {
+        padding-top: 28px;
+    }
+
+    .header {
+        gap: 12px;
+    }
+
+    .brand-icon {
+        flex-basis: 44px;
+        height: 44px;
+        font-size: 23px;
+    }
+
+    .panel-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .result-heading {
+        align-items: flex-start;
+    }
+
+    .audit-report {
+        padding: 16px;
+    }
+}
+
+
+/* ==========================================
+   18. REDUCED MOTION ACCESSIBILITY
+========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        transition: none !important;
+    }
+}
+
+
+/* ==========================================
+   19. PRINT / SAVE REPORT AS PDF
+========================================== */
+
+@media print {
+    @page {
+        margin: 15mm;
+    }
+
+    body {
+        min-height: auto;
+        background: white !important;
+        color: black !important;
+    }
+
+    body * {
+        visibility: hidden;
+    }
+
+    #result,
+    #result * {
+        visibility: visible;
+    }
+
+    #result {
+        position: absolute;
+        left: 0;
+        top: 0;
+
+        width: 100%;
+        margin: 0;
+        padding: 0;
+
+        border: none;
+        background: white !important;
+        color: black !important;
+    }
+
+    .audit-report,
+    .entropy-card,
+    .check-item {
+        background: white !important;
+        color: black !important;
+        border-color: #999 !important;
+        box-shadow: none !important;
+    }
+
+    .audit-report h2,
+    .audit-report h3,
+    .audit-report p,
+    .audit-report li,
+    .entropy-value,
+    .entropy-unit,
+    .entropy-note,
+    .check-item,
+    .recommendations li,
+    .disclaimer,
+    #strengthLabel,
+    #scoreLabel {
+        color: black !important;
+    }
+
+    .audit-report {
+        break-inside: avoid;
+    }
+
+    #printReport,
+    #togglePassword,
+    #passwordForm,
+    .analyze-button,
+    footer {
+        display: none !important;
+    }
+
+    .meter-track {
+        border: 1px solid #999;
+    }
+
+    .meter-fill {
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+    }
+}

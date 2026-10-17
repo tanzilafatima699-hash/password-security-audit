@@ -1,0 +1,203 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0b1020">
+
+    <title>Password Security Audit | Cybersecurity Tool</title>
+    <meta
+        name="description"
+        content="Evaluate password strength and receive practical security recommendations with local browser analysis."
+    >
+
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <main class="app">
+
+        <header class="header">
+            <div class="brand-icon" aria-hidden="true">⌘</div>
+
+            <div>
+                <p class="eyebrow">CYBERSECURITY TOOL</p>
+                <h1>Password Security Audit</h1>
+                <p class="subtitle">
+                    Evaluate password strength. Strengthen your security posture.
+                </p>
+            </div>
+        </header>
+
+        <section class="panel" aria-labelledby="analyzer-title">
+
+            <div class="panel-heading">
+                <div>
+                    <p class="eyebrow">PASSWORD ASSESSMENT</p>
+                    <h2 id="analyzer-title">Run a security assessment</h2>
+                </div>
+
+                <span class="local-badge">● Local analysis</span>
+            </div>
+
+            <form id="passwordForm">
+
+                <label for="password">Enter password</label>
+
+                <!-- Password field: only ONE eye icon -->
+                <div class="password-field">
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Enter a test password"
+                        autocomplete="off"
+                        autocapitalize="off"
+                        spellcheck="false"
+                        aria-describedby="privacy-note"
+                    >
+
+                    <button
+                        type="button"
+                        id="togglePassword"
+                        aria-label="Show password"
+                        aria-pressed="false"
+                    >
+                        <svg
+                            id="eyeIcon"
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="22"
+                            height="22"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            aria-hidden="true"
+                        >
+                            <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/>
+                            <circle cx="12" cy="12" r="3"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <p class="privacy-note" id="privacy-note">
+                    Privacy first: analysis runs in your browser.
+                    Do not enter a password you currently use for a real account.
+                </p>
+
+                <button type="submit" class="analyze-button">
+                    Run Security Check
+                    <span aria-hidden="true">→</span>
+                </button>
+
+            </form>
+
+            <div id="result" class="results" aria-live="polite" hidden>
+
+                <div class="result-heading">
+                    <div>
+                        <p class="eyebrow">ASSESSMENT RESULTS</p>
+                        <h2 id="strengthLabel">Not analyzed</h2>
+                    </div>
+
+                    <span id="scoreLabel" class="score-label">
+                        0 / 5
+                    </span>
+                </div>
+
+                <div
+                    class="meter-track"
+                    role="progressbar"
+                    id="strengthMeter"
+                    aria-label="Password rule checks passed"
+                    aria-valuemin="0"
+                    aria-valuemax="5"
+                    aria-valuenow="0"
+                >
+                    <div id="meterFill" class="meter-fill"></div>
+                </div>
+
+                <div class="entropy-card">
+                    <p class="eyebrow">RANDOMNESS ESTIMATE</p>
+                    <p class="entropy-value">
+                        <span id="entropyValue">0</span>
+                        <span class="entropy-unit">bits</span>
+                    </p>
+                    <p class="entropy-note">
+                        Estimated entropy based on character types and length.
+                    </p>
+                </div>
+
+                <h3>Security Checklist</h3>
+                <ul id="checklist" class="checklist"></ul>
+
+                <div
+                    id="commonWarning"
+                    class="warning"
+                    role="status"
+                    hidden
+                ></div>
+
+                <div class="recommendations">
+                    <h3>Security Recommendations</h3>
+                    <ul id="suggestions"></ul>
+                </div>
+
+                <p class="disclaimer">
+                    This assessment uses basic password rules and a limited
+                    common-password list. It does not guarantee resistance to
+                    guessing, cracking, or data breaches.
+                </p>
+
+            </div>
+        </section>
+
+        <footer>
+            <p>Cybersecurity Learning Project · Client-Side Analysis</p>
+        </footer>
+
+    </main>
+
+    <div class="audit-report">
+        <h2>Security Audit Report</h2>
+
+        <p>
+            <strong>Report Date:</strong>
+            <span id="auditDate">Not generated</span>
+        </p>
+
+        <p>
+            <strong>Overall Result:</strong>
+            <span id="auditStatus">Not generated</span>
+        </p>
+
+        <p>
+            <strong>Checks Passed:</strong>
+            <span id="auditPassed">0</span> / 5
+        </p>
+
+        <p>
+            <strong>Estimated Entropy:</strong>
+            <span id="auditEntropy">0</span> bits
+        </p>
+
+        <h3>Detected Risks</h3>
+        <ul id="auditRisks">
+            <li>Run the analyzer to generate a report.</li>
+        </ul>
+
+        <h3>Recommendations</h3>
+        <ul id="auditRecommendations">
+            <li>Analyze a sample password first.</li>
+        </ul>
+
+        <button type="button" id="printReport">
+            Print / Save Report as PDF
+        </button>
+    </div>
+
+</body>
+</html>
